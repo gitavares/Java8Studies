@@ -1,0 +1,17 @@
+package com.giselle;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Account giselleAccount = new Account("Giselle");
+		giselleAccount.deposit(50000000);
+		giselleAccount.withdraw(500);
+		giselleAccount.withdraw(-200);
+		giselleAccount.deposit(-20);
+		giselleAccount.calculateBalance();
+		
+		System.out.println("Balance on account is " + giselleAccount.getBalance());
+
+	}
+
+}

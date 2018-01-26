@@ -1,0 +1,24 @@
+package com.giselle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Theatre {
+	private final String theatreName;
+	private List<Seat> seats = new ArrayList<>();
+	
+	public Theatre(String theatreName, int numRows, int seatPerRow) {
+		super();
+		this.theatreName = theatreName;
+		
+		int lastRow = 'A' + (numRows -1);
+		
+		for (char row = 'A'; row < lastRow; row++) {
+			for (int seatNum = 1; seatNum <= seatPerRow; seatNum++) {
+				Seat seat = new Seat
+			}
+		}
+	}
+	
+	
+}

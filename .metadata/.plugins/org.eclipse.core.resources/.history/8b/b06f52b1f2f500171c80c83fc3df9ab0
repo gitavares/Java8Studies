@@ -1,0 +1,9 @@
+package com.giselle;
+
+public class Labrador extends Dog {
+
+	public Labrador() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

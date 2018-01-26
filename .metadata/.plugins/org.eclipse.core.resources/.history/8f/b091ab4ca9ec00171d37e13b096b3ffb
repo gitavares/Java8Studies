@@ -1,0 +1,37 @@
+package com.giselle;
+
+public class MyLinkedList implements NodeList {
+	private ListItem root = null;
+
+	public MyLinkedList(ListItem root) {
+		super();
+		this.root = root;
+	}
+	
+	@Override
+	public ListItem getRoot() {
+		return this.root;
+	}
+
+	@Override
+	public boolean addItem(ListItem newItem) {
+		if(this.root == null){
+			this.root = newItem;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeItem(ListItem item) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void traverse(ListItem root) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.giselle.StaticClass&apos; to &apos;StaticTest&apos;&#x0A;- Original project: &apos;Static&apos;&#x0A;- Original element: &apos;com.giselle.StaticClass&apos;&#x0A;- Renamed element: &apos;com.giselle.StaticTest&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;StaticClass&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.giselle{StaticClass.java[StaticClass" matchStrategy="1" name="StaticTest" qualified="false" references="true" similarDeclarations="false" stamp="1515061900244" textual="false" version="1.0"/>
+</session>

@@ -1,0 +1,26 @@
+package com.giselle;
+
+public class Labrador extends Dog {
+
+	public Labrador(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj){
+			return true;
+		}
+		
+		if (obj instanceof Dog) {
+			String objName = ((Dog)obj).getName();
+			return this.name.equals(objName);
+		}
+		
+		return false;
+	}
+
+	
+
+}

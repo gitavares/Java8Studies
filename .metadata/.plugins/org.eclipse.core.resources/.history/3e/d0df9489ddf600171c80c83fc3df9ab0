@@ -1,0 +1,36 @@
+package com.giselle;
+
+public class StockItem implements Comparable<StockItem> {
+	private final String name;
+	private double price;
+	private int quantityStock = 0; // can be initialized later
+	
+	
+	
+	public StockItem(String name, double price) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.quantityStock = 0; // or here (but you wouldnt normally do both)
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public int getQuantityStock() {
+		return quantityStock;
+	}
+
+	@Override
+	public int compareTo(StockItem arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+}

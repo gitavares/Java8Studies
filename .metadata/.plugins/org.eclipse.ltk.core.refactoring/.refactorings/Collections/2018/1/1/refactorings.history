@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.giselle.Map&apos; to &apos;MapProgram&apos;&#x0A;- Original project: &apos;Collections&apos;&#x0A;- Original element: &apos;com.giselle.Map&apos;&#x0A;- Renamed element: &apos;com.giselle.MapProgram&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Map&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.giselle{Map.java[Map" matchStrategy="1" name="MapProgram" qualified="false" references="true" similarDeclarations="false" stamp="1515153278834" textual="false" version="1.0"/>
+</session>
