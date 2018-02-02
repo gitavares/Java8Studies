@@ -1,8 +1,8 @@
 package com.giselle;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.giselle.Main.EOF;
 
@@ -10,22 +10,44 @@ public class Main {
     public static final String EOF = "EOF";
 
     public static void main(String[] args) {
-        List<String> buffer = new ArrayList<String>();
+        ArrayBlockingQueue<String> buffer = new ArrayBlockingQueue<String>(6);
+        ReentrantLock bufferLock = new ReentrantLock();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
+
         MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_YELLOW);
         MyConsumer consumer1 = new MyConsumer(buffer, ThreadColor.ANSI_PURPLE);
         MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN);
 
-        new Thread(producer).start();
-        new Thread(consumer1).start();
-        new Thread(consumer2).start();
+        executorService.execute(producer);
+        executorService.execute(consumer1);
+        executorService.execute(consumer2);
+
+        Future<String> future = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                System.out.println(ThreadColor.ANSI_WHITE + "I'm printed for the Callable class");
+                return "This is the callable result";
+            }
+        });
+
+        try {
+            System.out.println(future.get());
+        } catch (ExecutionException e){
+            System.out.println("Something went wrong");
+        } catch (InterruptedException e){
+            System.out.println("Thread running the task was interrupted");
+        }
+
+        executorService.shutdown();
     }
 }
 
 class MyProducer implements Runnable {
-    private List<String> buffer;
+    private ArrayBlockingQueue<String> buffer;
     private String color;
 
-    public MyProducer(List<String> buffer, String color) {
+    public MyProducer(ArrayBlockingQueue<String> buffer, String color) {
         this.buffer = buffer;
         this.color = color;
     }
@@ -37,9 +59,7 @@ class MyProducer implements Runnable {
         for (String num: nums){
             try {
                 System.out.println(color + "Adding..." + num);
-                synchronized (buffer){
-                    buffer.add(num);
-                }
+                buffer.put(num);
 
                 Thread.sleep(random.nextInt(1000));
             } catch (InterruptedException e){
@@ -48,17 +68,19 @@ class MyProducer implements Runnable {
         }
 
         System.out.println(color + "Adding EOF and exiting...");
-        synchronized (buffer){
-            buffer.add("EOF");
+        try {
+            buffer.put("EOF");
+        } catch (InterruptedException e){
+
         }
     }
 }
 
 class MyConsumer implements Runnable {
-    private List<String> buffer;
+    private ArrayBlockingQueue<String> buffer;
     private String color;
 
-    public MyConsumer(List<String> buffer, String color) {
+    public MyConsumer(ArrayBlockingQueue<String> buffer, String color) {
         this.buffer = buffer;
         this.color = color;
     }
@@ -66,15 +88,18 @@ class MyConsumer implements Runnable {
     public void run(){
         while(true){
             synchronized (buffer){
-                if(buffer.isEmpty()){
-                    continue;
-                }
+                try {
+                    if(buffer.isEmpty()){
+                        continue;
+                    }
 
-                if(buffer.get(0).equals(EOF)){
-                    System.out.println(color + "Exiting");
-                    break;
-                } else {
-                    System.out.println(color + "Removed " + buffer.remove(0));
+                    if(buffer.peek().equals(EOF)){
+                        System.out.println(color + "Exiting");
+                        break;
+                    } else {
+                        System.out.println(color + "Removed " + buffer.take());
+                    }
+                } catch (InterruptedException e){
                 }
             }
         }
