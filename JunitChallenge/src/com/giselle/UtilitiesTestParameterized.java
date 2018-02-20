@@ -28,7 +28,7 @@ public class UtilitiesTestParameterized {
     public static Collection<Object[]> testConditions(){
         return Arrays.asList(new Object[][]{
                 {"ABCDEFF", "ABCDEF"},
-                {"ABBBEFFG", "ABBEFG"},
+                {"ABBBEFFG", "ABEFG"},
                 {"112233445566", "123456"},
                 {"A", "A"}
         });
